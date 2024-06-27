@@ -1,20 +1,32 @@
-/*jshint esversion: 8 */
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const pinoLogger = require('./logger');
-
 const connectToDatabase = require('./models/db');
 const { loadData } = require("./util/import-mongo/index");
 
 const app = express();
 
 // Configure CORS
-const corsOptions = {
-    origin: process.env.CORS_ORIGIN,
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
-app.use(cors(corsOptions));
+app.use((req, res, next) => {
+    const allowedOrigins = [
+        process.env.CORS_ORIGIN,
+        process.env.CORS_ORIGIN
+    ]; 
+    const origin = req.headers.origin;
+
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    next();
+});
+
+
 
 const port = 3060;
 
@@ -56,3 +68,4 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
+
