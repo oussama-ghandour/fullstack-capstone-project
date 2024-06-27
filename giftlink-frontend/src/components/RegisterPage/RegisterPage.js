@@ -1,0 +1,87 @@
+import React, { useState } from "react";
+import './RegisterPage.css';
+
+function RegisterPage() {
+
+
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleRegister = async () => {
+        console.log("Register invoked");
+    }
+    return (
+        <div className="container mt-5">
+            <div className="row justify-content-center">
+                <div className="register-card p-4 border rounded">
+                    <div className="text-center mb-4 font-weight-bold">
+                        <div className="mb-4">
+                            <label  htmlFor="firstName" className="form label">FirstName</label>
+                              <input
+                                id="firstName"
+                                type="text"
+                                className="form-control"
+                                placeholder="Enter your firstName"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                                />
+                        </div>
+                         <div className="mb-4">
+                            <label  htmlFor="firstName" className="form label">FirstName</label>
+                              <input
+                                id="firstName"
+                                type="text"
+                                className="form-control"
+                                placeholder="Enter your firstName"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                                />
+                        </div>
+                         <div className="mb-4">
+                            <label  htmlFor="lastName" className="form label">lastName</label>
+                              <input
+                                id="lastName"
+                                type="text"
+                                className="form-control"
+                                placeholder="Enter your lastName"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                                />
+                        </div>
+                         <div className="mb-4">
+                            <label  htmlFor="email" className="form label">FirstName</label>
+                              <input
+                                id="email"
+                                type="text"
+                                className="form-control"
+                                placeholder="Enter your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                />
+                        </div>
+                         <div className="mb-4">
+                            <label  htmlFor="password" className="form label">FirstName</label>
+                              <input
+                                id="password"
+                                type="text"
+                                className="form-control"
+                                placeholder="Enter your password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                />
+                        </div>
+                            <button className="btn btn-primary w-100 mb-3" onClick={handleRegister}>Register</button>
+                        <p>
+                            Already a memeber? <a href="/app/login" className="text-primary">Login</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    )
+}
+
+export default RegisterPage;
