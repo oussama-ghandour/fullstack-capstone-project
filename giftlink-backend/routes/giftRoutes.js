@@ -17,12 +17,13 @@ router.get('/', async (req, res) => {
         const gifts = await collection.find({}).toArray();
 
         // Return the gifts using the res.json method
-        res.json(res.json(gifts));
+        res.json(gifts);
     } catch (e) {
         console.error('Error fetching gifts:', e);
         res.status(500).send('Error fetching gifts');
     }
 });
+
 
 router.get('/:id', async (req, res) => {
     try {

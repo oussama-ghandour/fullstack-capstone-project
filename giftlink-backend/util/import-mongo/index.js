@@ -4,6 +4,7 @@ const { MongoClient } = require('mongodb');
 const fs = require('fs');
 const path = require('path');
 
+
 // Check if MONGO_URL is set
 if (!process.env.MONGO_URL) {
     console.error('MONGO_URL is not defined in the .env file.');
