@@ -4,6 +4,7 @@ const cors = require('cors');
 const pinoLogger = require('./logger');
 const connectToDatabase = require('./models/db');
 const { loadData } = require("./util/import-mongo/index");
+const authRoutes = require("./routes/authRoutes.js");
 
 const app = express();
 const corsOptions = {
@@ -39,6 +40,8 @@ const pinoHttp = require('pino-http');
 const logger = require('./logger');
 
 app.use(pinoHttp({ logger }));
+
+app.use('/api/auth', authRoutes);
 
 // Use Routes add the giftRoutes to the server
 app.use('/api/gifts', giftRoutes);
