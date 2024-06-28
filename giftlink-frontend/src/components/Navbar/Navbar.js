@@ -13,6 +13,9 @@ export default function Navbar() {
                     <li>
                         <a className="nav-link" href="/app">Gifts</a>
                     </li>
+                    <li>
+                        <a className="nav-link" href="/app/search">Search</a>
+                    </li>
                 </ul>
             </div>
         </nav>
