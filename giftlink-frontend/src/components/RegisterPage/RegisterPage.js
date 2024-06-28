@@ -18,7 +18,7 @@ function RegisterPage() {
                 <div className="register-card p-4 border rounded">
                     <div className="text-center mb-4 font-weight-bold">
                         <div className="mb-4">
-                            <label  htmlFor="firstName" className="form label">FirstName</label>
+                            <label  htmlFor="firstName" className="form label">First Name</label>
                               <input
                                 id="firstName"
                                 type="text"
@@ -29,18 +29,7 @@ function RegisterPage() {
                                 />
                         </div>
                          <div className="mb-4">
-                            <label  htmlFor="firstName" className="form label">FirstName</label>
-                              <input
-                                id="firstName"
-                                type="text"
-                                className="form-control"
-                                placeholder="Enter your firstName"
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
-                                />
-                        </div>
-                         <div className="mb-4">
-                            <label  htmlFor="lastName" className="form label">lastName</label>
+                            <label  htmlFor="lastName" className="form label">Last Name</label>
                               <input
                                 id="lastName"
                                 type="text"
@@ -51,7 +40,7 @@ function RegisterPage() {
                                 />
                         </div>
                          <div className="mb-4">
-                            <label  htmlFor="email" className="form label">FirstName</label>
+                            <label  htmlFor="email" className="form label">Email</label>
                               <input
                                 id="email"
                                 type="text"
@@ -62,7 +51,7 @@ function RegisterPage() {
                                 />
                         </div>
                          <div className="mb-4">
-                            <label  htmlFor="password" className="form label">FirstName</label>
+                            <label  htmlFor="password" className="form label">Password</label>
                               <input
                                 id="password"
                                 type="text"

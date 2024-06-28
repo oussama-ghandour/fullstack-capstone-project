@@ -6,25 +6,16 @@ const connectToDatabase = require('./models/db');
 const { loadData } = require("./util/import-mongo/index");
 
 const app = express();
-
-// Configure CORS
-app.use((req, res, next) => {
-    const allowedOrigins = [
+const corsOptions = {
+    origin: [
         process.env.CORS_ORIGIN,
         process.env.CORS_ORIGIN
-    ]; 
-    const origin = req.headers.origin;
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+};
 
-    if (allowedOrigins.includes(origin)) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-    }
-
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-    next();
-});
+app.use(cors(corsOptions));
 
 
 

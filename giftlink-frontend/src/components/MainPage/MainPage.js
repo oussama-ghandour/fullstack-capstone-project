@@ -6,25 +6,24 @@ function MainPage() {
     const [gifts, setGifts] = useState([]);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        // async fetch gifts
-        const fetchGifts =  async () => {
-            try {
-                let url = `${urlConfig.backendUrl}/api/gifts`
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`HTTP error; ${response.status}`)
-                }
-                const data = await response.json();
-                setGifts(data);
-
-            } catch (error) {
-                console.log('Fetch error: ' + error.message);
-
+useEffect(() => {
+    const fetchGifts = async () => {
+        try {
+            let url = `${urlConfig.backendUrl}/api/gifts`;
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error; ${response.status}`);
             }
-        };
-        fetchGifts();
-    }, []);
+            const data = await response.json();
+            setGifts(data);
+
+        } catch (error) {
+            console.log('Fetch error: ' + error.message);
+        }
+    };
+    fetchGifts();
+}, []);
+
 
     // Navigate to details page
     const goToDetailsPage = (productId) => {
