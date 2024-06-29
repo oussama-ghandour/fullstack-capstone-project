@@ -1,22 +1,14 @@
 const express = require("express");
 const connectToDatabase = require("../models/db");
 const router = express.Router();
-const logger =  require('../logger');
-
+const logger = require('../logger');
 
 router.get('/', async (req, res) => {
     logger.info('/called');
     try {
-        // Connect to MongoDB and store connection to db constant
         const db = await connectToDatabase();
-
-        // Use the collection() method to retrieve the gift collection
         const collection = db.collection("gifts");
-
-        // Fetch all gifts using the collection.find method. Chain with toArray method to convert to JSON array
         const gifts = await collection.find({}).toArray();
-
-        // Return the gifts using the res.json method
         res.json(gifts);
     } catch (e) {
         console.error('Error fetching gifts:', e);
@@ -24,19 +16,12 @@ router.get('/', async (req, res) => {
     }
 });
 
-
 router.get('/:id', async (req, res) => {
     try {
-        //Connect to MongoDB and store connection to db constant
         const db = await connectToDatabase();
-
-        // Use the collection() method to retrieve the gift collection
         const collection = db.collection("gifts");
-
         const id = req.params.id;
-
-        // Find a specific gift by ID using the collection
-        const gift  = await collection.findOne({ id: id});
+        const gift = await collection.findOne({ id: id });
 
         if (!gift) {
             return res.status(404).send('Gift not found');
@@ -49,15 +34,11 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-
-
-// Add a new gift
 router.post('/', async (req, res, next) => {
     try {
         const db = await connectToDatabase();
         const collection = db.collection("gifts");
         const gift = await collection.insertOne(req.body);
-
         res.status(201).json(gift.ops[0]);
     } catch (e) {
         next(e);

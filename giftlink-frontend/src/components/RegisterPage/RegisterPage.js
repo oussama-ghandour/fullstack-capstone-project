@@ -16,49 +16,59 @@ function RegisterPage() {
     const navigate = useNavigate();
     const {setIsLoggedIn} = useAppContext();
 
-   const handleRegister = async () => {
-            try {
-                const response = await fetch(`${urlConfig.backendUrl}/api/auth/register`, {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        firstName: firstName,
-                        lastName: lastName,
-                        email: email,
-                        password: password
-                    })
-                });
-                const json = await response.json();
-                console.log('json data', json);
-                console.log('er', json.error);
-                if (json.authtoken) {
-                    sessionStorage.setItem('auth-token', json.authtoken);
-                    sessionStorage.setItem('name', firstName);
-                    sessionStorage.setItem('email', json.email);
-                    setIsLoggedIn(true);
-                    navigate('/app');
-                }
-                if (json.error) {
-                    setShower(json.error);
-                }
-            } catch (e) {
-                console.log("Error fetching details: " + e.message);
-            }
+  const handleRegister = async () => {
+    try {
+        const response = await fetch(`${urlConfig.backendUrl}/api/auth/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                firstName,
+                lastName,
+                email,
+                password,
+            }),
+        });
+
+        if (!response.ok) {
+            console.log(`Server error: ${response.status}`);
+            setShower('Registration failed. Please try again.');
+            return;
         }
+
+        const json = await response.json();
+        console.log('Response:', json);
+
+        if (json.authtoken) {
+            sessionStorage.setItem('auth-token', json.authtoken);
+            sessionStorage.setItem('name', firstName);
+            sessionStorage.setItem('email', json.email);
+            setIsLoggedIn(true);
+            navigate('/app');
+        }
+
+        if (json.error) {
+            setShower(json.error);
+        }
+    } catch (e) {
+        console.log("Error fetching details:", e.message);
+        setShower('An error occurred. Please try again.');
+    }
+};
+
     return (
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="register-card p-4 border rounded">
                     <div className="text-center mb-4 font-weight-bold">
                         <div className="mb-4">
-                            <label  htmlFor="firstName" className="form label">First Name</label>
-                              <input
+                             <label  htmlFor="firstName" className="form label">First Name</label>
+                             <input
                                 id="firstName"
                                 type="text"
                                 className="form-control"
-                                placeholder="Enter your firstName"
+                                placeholder="Enter your lastName"
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
                                 />
